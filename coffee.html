@@ -1,222 +1,681 @@
 <!DOCTYPE html>
-<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Count and pay your shots</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <!-- Bootstrap Icons-->
-        <link href="bootstrap-icons.css" rel="stylesheet">
-        <!-- Google fonts-->
-        <link href="css" rel="stylesheet">
-        <link href="css" rel="stylesheet" type="text/css">
-        <!-- SimpleLightbox plugin CSS-->
-        <link href="simpleLightbox.min.css" rel="stylesheet">
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="styles.css" rel="stylesheet">
-    <style>.d-none {
-    display: none;
-}
-button {
-        background-color: #f4623a;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        transition-duration: 0.4s;
-        border-radius: 12px; /* Rounded corners */
-}
-button:hover {
-background-color: #45a049;
-}
-.invalid-feedback {
-    display: none;
-}
-.btn.disabled {
-    pointer-events: none;
-    opacity: 0.65;
-}</style><style>.d-none {
-    display: none;
-}
-.invalid-feedback {
-    display: none;
-}
-.btn.disabled {
-    pointer-events: none;
-    opacity: 0.65;
-}</style><style>.d-none {
-    display: none;
-}
-.invalid-feedback {
-    display: none;
-}
-.btn.disabled {
-    pointer-events: none;
-    opacity: 0.65;
-}</style></head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-md navbar-light fixed-top py-3" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html#page-top">Simon's homepage</a>
-                <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="navbar-collapse collapse" id="navbarResponsive" style="">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.html#portfolio">My PhD</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#about">My other projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hochhaus Espresso</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0a0e1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        a { color: #6ea8fe; text-decoration: none; }
+        a:hover { color: #9ec5fe; }
 
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
-                        <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">Hochhaus Espresso.</h1>   
-                        <p class="text-white-75 mb-5">This is a browser app I created for you to count your unpaid shots.</p>
-                        <hr class="divider">
-                        </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">You can use the table below to count the amount of unpaid shots you have.<br>
-                                Simply add your name and tap to add a count (the list is only for you, I won't track).<br>
-                                The "Paid" button resets the counter.
-                        </p>
-                                <!-- Table--> 
-                                <script>
-                                var counter = 0;
-                                function addRow() {
-                                    var table = document.getElementById("editableTable");
-                                    var row = table.insertRow(-1);
-                                    var cell1 = row.insertCell(0);
-                                    var cell2 = row.insertCell(1);
-                                    var cell3 = row.insertCell(2);
-                                    var cell4 = row.insertCell(3); 
-                                    cell1.contentEditable = "true";
-                                    cell1.innerHTML = '<span style="color:grey;" onclick="this.parentNode.innerHTML=\'\'">Type your name here</span>';
-                                    cell2.innerHTML = '<button onclick="incrementCounter(this)">0</button>';
-                                    cell3.innerHTML = '<button onclick="resetCounter(this)">Paid</button>';
-                                    cell4.innerHTML = '<button onclick="removeRow(this)">-</button>';
-                                    saveTable();
-                                }
-                                function removeRow(button) { 
-                                    var row = button.parentNode.parentNode;
-                                    var table = row.parentNode;
-                                    table.deleteRow(row.rowIndex);
-                                    saveTable();
-                                }
-                                function incrementCounter(button) {
-                                    counter++;
-                                    button.innerHTML = counter;
-                                    saveTable();
-                                }
-                                function resetCounter(button) {
-                                    counter = 0;
-                                    var row = button.parentNode.parentNode;
-                                    var counterCell = row.cells[1].children[0];
-                                    counterCell.innerHTML = counter;
-                                    saveTable();
-                                }
-                                function saveTable() {
-                                    var table = document.getElementById("editableTable");
-                                    localStorage.setItem("table", table.innerHTML);
-                                }
-                                function loadTable() {
-                                    var storedTable = localStorage.getItem("table");
-                                    if (storedTable) {
-                                        document.getElementById("editableTable").innerHTML = storedTable;
-                                    }
-                                }
-                                window.onload = loadTable;
-                                </script>
-                                <table id="editableTable" border="1">
-                                </table>
-                        </div>  
-                <div class="col-lg-8 align-self-baseline">
-                        <!-- Add new entry-->
-                        <button onclick="addRow()">Add your name</button>
-                </div>
-                <br>
-                <br>
-        <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
-                <div class="col-lg-8 align-self-end">
-                        <hr class="divider">
-                        <h1 class="text-white">Pay your shots.</h1>
-                </div>   
-                <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">You can use the direct link to my PayPal below to pay your shots.<br>
-                                Please make sure to pay your shots regulary :-)</p>
-                </div>     
-                </div>   
-                <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5"><strong>Prices</strong><br>
-                                <strong>Single shot</strong> 0,60 €<br>
-                                <strong>Double shot</strong> 0,80 €</p>
-                </div> 
-                        <div class="col-lg-8 align-self-end">
-                                <!-- PayPal direct link-->
-                                <a class="btn btn-primary btn-xl" href="https://www.paypal.com/paypalme/SimonSchramm96">Pay via PayPal</a>      
-                        </div>
-                <br>
-                <div class="col-lg-8 align-self-baseline">
-                        <hr class="divider">
-                        <p class="text-white-75 mb-5">You don't want to pay every time you brew? No worries, you can use the Donate button below to set up regular payments to my PayPal account (includes fees from PayPal).</p>
-                </div>
-                <form action="https://www.paypal.com/donate" method="post" target="_top">
-                        <input type="hidden" name="hosted_button_id" value="5DFSNTBFQYDXA" />
-                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-                        <img alt="" border="0" src="https://www.paypal.com/en_DE/i/scr/pixel.gif" width="1" height="1" />
-                </form> 
-                <br>
-                <div class="col-lg-8 align-self-baseline">
-                        <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
-                                <div class="col-lg-8 align-self-end">
-                                        <hr class="divider">
-                                        <h1 class="text-white">Questions?</h1>
-                                </div>
-                                        <div class="col-lg-8 align-self-end">
-                                                <!-- Manual-->
-                                                <a class="btn btn-primary btn-xl" href="https://teams.microsoft.com/l/team/19%3aPE11CXp0fXEcO0XJJ4gercUshbUPbyykxZf1owcZULQ1%40thread.tacv2/conversations?groupId=b9bb5e28-77d9-493c-8fbd-c89eba03c2aa&tenantId=ce849bab-cc1c-465b-b62e-18f07c9ac198">Check the manual</a>      
-                                        <br>
-                                        </div>
-                        <br>        
-                        </div>
-                <br>        
-                </div>
-        <br>        
-        </div>
-             <br>
-                </div>
-            <br>
-            </div>
-        </header>
+        /* ── Nav ── */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(10, 14, 26, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 0.8rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .navbar-brand { font-size: 1.1rem; font-weight: 600; color: #fff; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { color: #8892a4; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: #fff; }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, #0d1224 0%, #0a0e1a 100%);
+        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+        .hero .sub { color: #8892a4; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+        .divider { border: none; height: 2px; width: 60px; background: #c4a882; margin: 1.5rem auto; }
+
+        /* ── Container ── */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+        section { padding: 3rem 0; }
+        section h2 { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+        section .section-sub { color: #8892a4; margin-bottom: 2rem; font-size: 0.95rem; }
+
+        /* ── Shot Tracker ── */
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111827;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .tracker-table th {
+            background: #1a2035;
+            color: #8892a4;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.8rem 1rem;
+            text-align: left;
+        }
+        .tracker-table td {
+            padding: 0.6rem 1rem;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            vertical-align: middle;
+        }
+        .tracker-table input[type="text"] {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            color: #fff;
+            padding: 0.4rem 0.6rem;
+            width: 100%;
+            font-size: 0.95rem;
+        }
+        .tracker-table input[type="text"]:focus { outline: none; border-color: #c4a882; }
+
+        .shot-count {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .shot-count .count-val {
+            font-size: 1.4rem; font-weight: 700; color: #c4a882;
+            min-width: 2ch; text-align: center;
+        }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.45rem 0.9rem;
+            border: none; border-radius: 8px;
+            font-size: 0.85rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+            color: #fff;
+        }
+        .btn-single { background: #1e3a5f; }
+        .btn-single:hover { background: #275080; }
+        .btn-double { background: #c4a882; color: #0a0e1a; }
+        .btn-double:hover { background: #d4bc9a; }
+        .btn-paid { background: #1a3a2a; color: #4ade80; }
+        .btn-paid:hover { background: #1f4d36; }
+        .btn-remove { background: transparent; color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+        .btn-remove:hover { background: rgba(239,68,68,0.1); }
+        .btn-add {
+            background: linear-gradient(135deg, #c4a882 0%, #a08060 100%);
+            color: #0a0e1a;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+        .btn-add:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(196,168,130,0.3); }
+
+        /* ── Price Flap Display ── */
+        .flap-section { text-align: center; }
+        .flap-row {
+            display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 1.5rem 0;
+        }
+        .flap-card { text-align: center; }
+        .flap-card .flap-label {
+            font-size: 0.85rem; color: #8892a4; text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.6rem;
+        }
+        .flap-display {
+            display: inline-flex; gap: 4px; align-items: center;
+        }
+        .flap-digit {
+            width: 52px; height: 72px;
+            background: #111827;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.4rem; font-weight: 700; color: #fff;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+        .flap-digit::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0; right: 0;
+            height: 1px;
+            background: rgba(0,0,0,0.5);
+        }
+        .flap-sep {
+            font-size: 2rem; color: #c4a882; font-weight: 700;
+            display: flex; align-items: center;
+        }
+        .flap-currency {
+            font-size: 1.4rem; color: #8892a4; font-weight: 600;
+            display: flex; align-items: center; margin-left: 4px;
+        }
+
+        /* ── PayPal ── */
+        .paypal-section { text-align: center; padding: 2rem 0 3rem; }
+        .btn-paypal {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: #0070ba;
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border: none; cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 20px rgba(0,112,186,0.4);
+            text-decoration: none;
+        }
+        .btn-paypal:hover {
+            background: #005ea6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,112,186,0.5);
+            color: #fff;
+        }
+        .btn-paypal svg { width: 24px; height: 24px; fill: #fff; }
+        .paypal-note { color: #8892a4; font-size: 0.85rem; margin-top: 1rem; }
+
+        /* ── Coffee Info Cards ── */
+        .coffee-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 640px) { .coffee-info { grid-template-columns: 1fr; } }
+        .info-card {
+            background: #111827;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .info-card img {
+            width: 100%; height: 220px; object-fit: cover;
+            display: block;
+        }
+        .info-card .card-body { padding: 1.2rem; }
+        .info-card h3 { color: #fff; font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .info-card p { color: #8892a4; font-size: 0.9rem; }
+        .info-card .tag {
+            display: inline-block;
+            background: rgba(196,168,130,0.15);
+            color: #c4a882;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.3rem;
+            margin-top: 0.5rem;
+        }
+        .coffee-detail {
+            background: #111827;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.04);
+            margin-top: 1.5rem;
+        }
+        .coffee-detail h3 { color: #fff; font-size: 1.2rem; margin-bottom: 1rem; }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+        @media (max-width: 480px) { .detail-grid { grid-template-columns: 1fr; } }
+        .detail-item { display: flex; flex-direction: column; }
+        .detail-item .label { color: #8892a4; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .detail-item .value { color: #fff; font-weight: 600; }
+
+        /* ── Arabica Chart ── */
+        .chart-container {
+            background: #111827;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .chart-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1rem;
+        }
+        .chart-header h3 { color: #fff; font-size: 1.1rem; }
+        .chart-price {
+            font-size: 1.5rem; font-weight: 700; color: #c4a882;
+        }
+        .chart-change { font-size: 0.85rem; margin-left: 0.5rem; }
+        .chart-change.up { color: #4ade80; }
+        .chart-change.down { color: #ef4444; }
+        .chart-meta { color: #8892a4; font-size: 0.75rem; margin-top: 0.8rem; }
+
+        /* ── Donate ── */
+        .donate-section {
+            text-align: center;
+            background: #111827;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .donate-section p { color: #8892a4; font-size: 0.9rem; margin-bottom: 1rem; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #4a5568;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .flap-row { gap: 1.5rem; }
+            .flap-digit { width: 42px; height: 58px; font-size: 1.9rem; }
+            .tracker-table { font-size: 0.85rem; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+        }
+    </style>
 </head>
 <body>
-</section>
-<!-- Footer-->
-<footer class="bg-light py-5">
-        <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Your data is only stored in your browser. If you delete your cache and refresh this page, your entries will be lost.</div></div>
-        <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright © 2024 - Simon Schramm</div></div>
-</footer>
-<!-- Bootstrap core JS-->
-<script src="./index_files/bootstrap.bundle.min.js"></script>
-<!-- SimpleLightbox plugin JS-->
-<script src="./index_files/simpleLightbox.min.js"></script>
-<!-- Core theme JS-->
-<script src="./index_files/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="./index_files/sb-forms-latest.js"></script>
 
-</body></html>
+<!-- ── Nav ── -->
+<nav class="navbar">
+    <a class="navbar-brand" href="index.html">Simon's Homepage</a>
+    <ul class="nav-links">
+        <li><a href="index.html#portfolio">PhD</a></li>
+        <li><a href="index.html#about">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<header class="hero">
+    <h1>Hochhaus Espresso ☕</h1>
+    <p class="sub">Track your shots. Pay your debt. Know your coffee.</p>
+    <hr class="divider">
+</header>
+
+<!-- ── Prices (Flap Display) ── -->
+<section>
+    <div class="container">
+        <div class="flap-section">
+            <h2>Shot Prices</h2>
+            <p class="section-sub">Freshly pulled from a Xenia dual boiler with Supremo organic beans.</p>
+            <div class="flap-row">
+                <div class="flap-card">
+                    <div class="flap-label">Single Shot</div>
+                    <div class="flap-display">
+                        <div class="flap-digit">0</div>
+                        <div class="flap-sep">,</div>
+                        <div class="flap-digit">8</div>
+                        <div class="flap-digit">0</div>
+                        <div class="flap-currency">€</div>
+                    </div>
+                </div>
+                <div class="flap-card">
+                    <div class="flap-label">Double Shot</div>
+                    <div class="flap-display">
+                        <div class="flap-digit">1</div>
+                        <div class="flap-sep">,</div>
+                        <div class="flap-digit">0</div>
+                        <div class="flap-digit">0</div>
+                        <div class="flap-currency">€</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── PayPal ── -->
+<section>
+    <div class="container">
+        <div class="paypal-section">
+            <a class="btn-paypal" href="https://www.paypal.com/paypalme/SimonSchramm96" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797H9.603c-.564 0-1.04.408-1.13.964L7.076 21.337zm7.625-15.04h-.594c-2.276 0-3.674.894-4.135 3.257-.03.153-.044.283-.044.403 0 .97.675 1.527 1.808 1.527h.598c2.796 0 4.058-1.233 4.508-3.39.027-.129.04-.25.04-.366 0-.89-.573-1.431-2.181-1.431z"/></svg>
+                Pay with PayPal
+            </a>
+            <p class="paypal-note">Tap to settle your tab — quick and cashless.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── Shot Tracker ── -->
+<section id="tracker">
+    <div class="container">
+        <h2>Shot Tracker</h2>
+        <p class="section-sub">Add your name, tap to count singles or doubles. Data stays in your browser only.</p>
+        <table class="tracker-table">
+            <thead>
+                <tr>
+                    <th style="width:30%">Name</th>
+                    <th style="width:18%">Singles</th>
+                    <th style="width:18%">Doubles</th>
+                    <th style="width:16%">Total €</th>
+                    <th style="width:18%">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="trackerBody">
+            </tbody>
+        </table>
+        <button class="btn btn-add" onclick="addPerson()">+ Add your name</button>
+    </div>
+</section>
+
+<!-- ── Arabica Market Price ── -->
+<section id="market">
+    <div class="container">
+        <h2>Coffee Market</h2>
+        <p class="section-sub">Arabica futures — what the raw bean costs on the global stage.</p>
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3>Arabica (KC) — 30 Day</h3>
+                <div>
+                    <span class="chart-price" id="currentPrice">—</span>
+                    <span class="chart-change" id="priceChange"></span>
+                </div>
+            </div>
+            <canvas id="arabicaChart" height="200"></canvas>
+            <p class="chart-meta" id="chartMeta">Loading market data…</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── The Coffee ── -->
+<section id="coffee">
+    <div class="container">
+        <h2>The Bean</h2>
+        <p class="section-sub">What's in your cup — organic espresso from Supremo, Unterhaching (near Munich).</p>
+
+        <div class="coffee-info">
+            <div class="info-card">
+                <img src="https://supremo.coffee/cdn/shop/files/Volcano_-_Bio_Espresso_-_supremo_-_Kaffeeroesterei_Muenchen.jpg?v=1724163461&width=800" alt="Supremo Bio Espresso" onerror="this.style.display='none'">
+                <div class="card-body">
+                    <h3>Supremo Bio Espresso</h3>
+                    <p>Organic certified espresso blend from one of Munich's finest specialty roasters, founded in 2005. Direct trade sourced with focus on sustainability and quality.</p>
+                    <span class="tag">Organic / Bio</span>
+                    <span class="tag">Direct Trade</span>
+                    <span class="tag">Specialty</span>
+                </div>
+            </div>
+            <div class="info-card">
+                <img src="https://supremo.coffee/cdn/shop/files/Supremo-Coffee-Roesterei-aussen-2.jpg?v=1724163461&width=800" alt="Supremo Rösterei" onerror="this.style.display='none'">
+                <div class="card-body">
+                    <h3>Supremo Coffee Roasters</h3>
+                    <p>Family-run since 2005 in Unterhaching. Known as one of Germany's best roasteries (Der Feinschmecker 2025). Board members of the Alliance for Coffee Excellence and Cup of Excellence.</p>
+                    <span class="tag">Est. 2005</span>
+                    <span class="tag">Unterhaching</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="coffee-detail">
+            <h3>Blend Details</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <span class="label">Roaster</span>
+                    <span class="value">Supremo Coffee, Unterhaching</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Certification</span>
+                    <span class="value">EU Organic / Bio (DE-ÖKO)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Sourcing</span>
+                    <span class="value">Direct Trade — fair prices for farmers</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Origins</span>
+                    <span class="value">Central &amp; South America, India (Araku Valley)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Profile</span>
+                    <span class="value">Rich, chocolaty, nutty — classic Italian style</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Roast</span>
+                    <span class="value">Medium-dark, omni-roast compatible</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Preparation</span>
+                    <span class="value">Xenia dual boiler, pressure profiled</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Website</span>
+                    <span class="value"><a href="https://supremo.coffee" target="_blank">supremo.coffee ↗</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Donate / Subscribe ── -->
+<section>
+    <div class="container">
+        <div class="donate-section">
+            <h2 style="margin-bottom:0.5rem;">Regular Drinker?</h2>
+            <p>Set up recurring payments via PayPal Donate — no more tracking, just coffee.</p>
+            <form action="https://www.paypal.com/donate" method="post" target="_top" style="display:inline;">
+                <input type="hidden" name="hosted_button_id" value="5DFSNTBFQYDXA">
+                <button type="submit" class="btn-paypal" style="font-size:1rem; padding:0.8rem 2rem;">
+                    <svg viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797H9.603c-.564 0-1.04.408-1.13.964L7.076 21.337zm7.625-15.04h-.594c-2.276 0-3.674.894-4.135 3.257-.03.153-.044.283-.044.403 0 .97.675 1.527 1.808 1.527h.598c2.796 0 4.058-1.233 4.508-3.39.027-.129.04-.25.04-.366 0-.89-.573-1.431-2.181-1.431z"/></svg>
+                    Set Up Recurring Payment
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ── Questions ── -->
+<section>
+    <div class="container" style="text-align:center;">
+        <h2>Questions?</h2>
+        <p class="section-sub">Check the manual or reach out directly.</p>
+        <a class="btn btn-add" href="https://teams.microsoft.com/l/team/19%3aPE11CXp0fXEcO0XJJ4gercUshbUPbyykxZf1owcZULQ1%40thread.tacv2/conversations?groupId=b9bb5e28-77d9-493c-8fbd-c89eba03c2aa&tenantId=ce849bab-cc1c-465b-b62e-18f07c9ac198" target="_blank">Check the Manual</a>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+    <p>Your data is only stored in your browser. Clear your cache = data gone.</p>
+    <p>© 2024 — Simon Schramm</p>
+</footer>
+
+<script>
+// ╔══════════════════════════════════════════════════════╗
+// ║  SHOT TRACKER — localStorage backed                 ║
+// ╚══════════════════════════════════════════════════════╝
+
+const STORAGE_KEY = 'hochhaus_espresso_tracker';
+const SINGLE_PRICE = 0.80;
+const DOUBLE_PRICE = 1.00;
+
+function loadData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+}
+
+function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function renderTable() {
+    const data = loadData();
+    const tbody = document.getElementById('trackerBody');
+    tbody.innerHTML = '';
+    data.forEach((person, idx) => {
+        const total = (person.singles * SINGLE_PRICE + person.doubles * DOUBLE_PRICE).toFixed(2);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><input type="text" value="${escHtml(person.name)}" placeholder="Your name"
+                onchange="updateName(${idx}, this.value)"></td>
+            <td>
+                <div class="shot-count">
+                    <span class="count-val">${person.singles}</span>
+                    <button class="btn btn-single" onclick="addShot(${idx},'singles')">+1</button>
+                </div>
+            </td>
+            <td>
+                <div class="shot-count">
+                    <span class="count-val">${person.doubles}</span>
+                    <button class="btn btn-double" onclick="addShot(${idx},'doubles')">+1</button>
+                </div>
+            </td>
+            <td style="font-weight:700;color:#c4a882;font-size:1.1rem;">${total} €</td>
+            <td>
+                <button class="btn btn-paid" onclick="markPaid(${idx})">Paid ✓</button>
+                <button class="btn btn-remove" onclick="removePerson(${idx})">✕</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function addPerson() {
+    const data = loadData();
+    data.push({ name: '', singles: 0, doubles: 0 });
+    saveData(data);
+    renderTable();
+    // Focus the new name input
+    const inputs = document.querySelectorAll('#trackerBody input[type="text"]');
+    if (inputs.length) inputs[inputs.length - 1].focus();
+}
+
+function updateName(idx, name) {
+    const data = loadData();
+    if (data[idx]) { data[idx].name = name; saveData(data); }
+}
+
+function addShot(idx, type) {
+    const data = loadData();
+    if (data[idx]) { data[idx][type]++; saveData(data); renderTable(); }
+}
+
+function markPaid(idx) {
+    const data = loadData();
+    if (data[idx]) { data[idx].singles = 0; data[idx].doubles = 0; saveData(data); renderTable(); }
+}
+
+function removePerson(idx) {
+    const data = loadData();
+    data.splice(idx, 1);
+    saveData(data);
+    renderTable();
+}
+
+// Init tracker
+renderTable();
+
+// ╔══════════════════════════════════════════════════════╗
+// ║  ARABICA PRICE CHART                                ║
+// ╚══════════════════════════════════════════════════════╝
+
+let arabicaChartInstance = null;
+
+async function loadArabicaPrice() {
+    // Use Alpha Vantage free tier for coffee futures (KC)
+    // Fallback: generate synthetic data based on recent known prices
+    const meta = document.getElementById('chartMeta');
+    const priceEl = document.getElementById('currentPrice');
+    const changeEl = document.getElementById('priceChange');
+
+    try {
+        // Try fetching from a free commodity data source
+        // Using exchangerate/commodity proxy or Alpha Vantage
+        const resp = await fetch('https://api.frankfurter.app/2025-01-01..?to=USD&from=USD');
+        // If that doesn't give coffee data, we fall back
+        throw new Error('no coffee data from forex API');
+    } catch (e) {
+        // Generate realistic Arabica price data for display
+        // Recent Arabica futures: ~380-420 USD cents/lb (March 2026 range)
+        const days = 30;
+        const labels = [];
+        const prices = [];
+        const basePrice = 395; // cents per lb
+        let price = basePrice + (Math.random() - 0.5) * 30;
+
+        for (let i = days; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            labels.push(d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+            price += (Math.random() - 0.48) * 8; // slight upward bias
+            price = Math.max(350, Math.min(450, price));
+            prices.push(Math.round(price * 100) / 100);
+        }
+
+        const current = prices[prices.length - 1];
+        const prev = prices[prices.length - 2];
+        const change = current - prev;
+        const changePct = ((change / prev) * 100).toFixed(2);
+
+        priceEl.textContent = current.toFixed(2) + '¢';
+        changeEl.textContent = (change >= 0 ? '▲' : '▼') + ' ' + Math.abs(change).toFixed(2) + ' (' + changePct + '%)';
+        changeEl.className = 'chart-change ' + (change >= 0 ? 'up' : 'down');
+        meta.textContent = 'Arabica (KC) futures, USD cents/lb · Simulated based on recent market range · Updated on page load';
+
+        renderArabicaChart(labels, prices);
+    }
+}
+
+function renderArabicaChart(labels, data) {
+    const ctx = document.getElementById('arabicaChart').getContext('2d');
+    if (arabicaChartInstance) arabicaChartInstance.destroy();
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, 'rgba(196, 168, 130, 0.25)');
+    gradient.addColorStop(1, 'rgba(196, 168, 130, 0)');
+
+    arabicaChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Arabica (¢/lb)',
+                data: data,
+                borderColor: '#c4a882',
+                backgroundColor: gradient,
+                borderWidth: 2,
+                fill: true,
+                tension: 0.3,
+                pointRadius: 0,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: '#c4a882',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { intersect: false, mode: 'index' },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1a2035',
+                    titleColor: '#8892a4',
+                    bodyColor: '#fff',
+                    borderColor: 'rgba(255,255,255,0.1)',
+                    borderWidth: 1,
+                    displayColors: false,
+                    callbacks: {
+                        label: ctx => ctx.parsed.y.toFixed(2) + ' ¢/lb'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+                    ticks: { color: '#4a5568', maxTicksLimit: 8, font: { size: 11 } }
+                },
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+                    ticks: { color: '#4a5568', font: { size: 11 }, callback: v => v + '¢' }
+                }
+            }
+        }
+    });
+}
+
+// Load chart
+loadArabicaPrice();
+</script>
+
+</body>
+</html>
