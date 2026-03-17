@@ -1,187 +1,306 @@
 <!DOCTYPE html>
-<!-- saved from url=(0075)file:///Users/q537342/Downloads/startbootstrap-creative-gh-pages/index.html -->
-<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Simon's Homepage</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <!-- Bootstrap Icons-->
-        <link href="bootstrap-icons.css" rel="stylesheet">
-        <!-- Google fonts-->
-        <link href="css" rel="stylesheet">
-        <link href="css" rel="stylesheet" type="text/css">
-        <!-- SimpleLightbox plugin CSS-->
-        <link href="simpleLightbox.min.css" rel="stylesheet">
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="styles.css" rel="stylesheet">
-    <style>.d-none {
-    display: none;
-}
-.invalid-feedback {
-    display: none;
-}
-.btn.disabled {
-    pointer-events: none;
-    opacity: 0.65;
-}</style><style>.d-none {
-    display: none;
-}
-.invalid-feedback {
-    display: none;
-}
-.btn.disabled {
-    pointer-events: none;
-    opacity: 0.65;
-}</style><style>.d-none {
-    display: none;
-}
-.invalid-feedback {
-    display: none;
-}
-.btn.disabled {
-    pointer-events: none;
-    opacity: 0.65;
-}</style></head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html#page-top">Hi there, my name is Simon!</a>
-                <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="navbar-collapse collapse" id="navbarResponsive" style="">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.html#portfolio">My PhD</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#about">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Simon Schramm – PhD researcher, cyclist, barista.">
+    <meta name="author" content="Simon Schramm">
+    <title>Simon's Homepage</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Bootstrap Icons -->
+    <link href="bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0a0e1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        a { color: #c4a882; text-decoration: none; }
+        a:hover { color: #dfc09e; }
+
+        /* ── Navbar ── */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(10, 14, 26, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 0.9rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .navbar-brand { font-size: 1.05rem; font-weight: 600; color: #fff; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { color: #8892a4; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: #fff; }
+        .navbar-toggler {
+            display: none; background: none; border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px; padding: 0.4rem 0.6rem; cursor: pointer; color: #e0e0e0;
+        }
+        @media (max-width: 768px) {
+            .navbar-toggler { display: block; }
+            .nav-links { display: none; flex-direction: column; gap: 0.5rem; position: absolute;
+                top: 100%; left: 0; right: 0; background: rgba(10,14,26,0.97);
+                padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+            .nav-links.open { display: flex; }
+        }
+
+        /* ── Hero ── */
+        .masthead {
+            padding: 9rem 2rem 5rem;
+            text-align: center;
+            background: linear-gradient(180deg, #0d1224 0%, #0a0e1a 100%);
+        }
+        .masthead h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; color: #fff; margin-bottom: 0.8rem; }
+        .masthead p { color: rgba(255,255,255,0.7); font-size: 1.05rem; max-width: 580px; margin: 0 auto 2rem; }
+        .divider { border: none; height: 2px; width: 60px; background: #c4a882; margin: 1.2rem auto; }
+        .btn-primary {
+            display: inline-block;
+            background: #c4a882; color: #0a0e1a;
+            padding: 0.75rem 2rem; border-radius: 50px;
+            font-weight: 700; font-size: 0.95rem;
+            transition: background 0.2s, transform 0.15s;
+            border: none; cursor: pointer;
+        }
+        .btn-primary:hover { background: #dfc09e; color: #0a0e1a; transform: translateY(-2px); }
+
+        /* ── FindPenguins section ── */
+        .travel-section {
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            background: #0a0e1a;
+        }
+        .travel-section h1 { font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 700; color: #fff; margin-bottom: 0.8rem; }
+        .findpenguins-media {
+            margin-top: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111827;
+            display: inline-block;
+            max-width: 100%;
+        }
+        /* Force FindPenguins widget into dark context */
+        .findpenguins-wrapper {
+            filter: invert(1) hue-rotate(180deg);
+            border-radius: 12px;
+            overflow: hidden;
+            display: inline-block;
+            max-width: 100%;
+        }
+        .findpenguins-wrapper a { color: #c4a882 !important; }
+
+        /* ── Portfolio Grid ── */
+        #portfolio { background: #0a0e1a; }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (max-width: 900px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 540px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
+        .portfolio-box {
+            position: relative; overflow: hidden; display: block;
+            aspect-ratio: 1/1;
+        }
+        .portfolio-box img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+        .portfolio-box:hover img { transform: scale(1.06); }
+        .portfolio-box-caption {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(10,14,26,0.92) 0%, rgba(10,14,26,0.3) 60%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .portfolio-box:hover .portfolio-box-caption { opacity: 1; }
+        .project-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #c4a882; margin-bottom: 0.4rem; }
+        .project-name { color: #fff; font-size: 0.9rem; line-height: 1.4; }
+
+        /* ── Contact ── */
+        #contact {
+            padding: 5rem 2rem;
+            background: #0a0e1a;
+        }
+        .contact-inner {
+            max-width: 960px; margin: 0 auto; text-align: center;
+        }
+        #contact h2 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+        #contact p { color: #8892a4; max-width: 480px; margin: 0 auto 2.5rem; }
+        .contact-card {
+            display: inline-flex; flex-direction: column; gap: 1rem;
+            background: #111827; border-radius: 12px; padding: 2rem 3rem;
+            align-items: center;
+        }
+        .contact-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #c4a882; font-size: 1rem; font-weight: 500;
+            transition: color 0.2s;
+        }
+        .contact-link:hover { color: #dfc09e; }
+        .btn-tel {
+            background: none; border: 1px solid #c4a882; border-radius: 8px;
+            color: #c4a882; padding: 0.5rem 1.2rem; cursor: pointer;
+            font-size: 0.95rem; font-weight: 500; transition: all 0.2s;
+        }
+        .btn-tel:hover { background: #c4a882; color: #0a0e1a; }
+        #tel-reveal { color: #c4a882; font-size: 1rem; }
+
+        /* ── Footer ── */
+        footer {
+            background: #111827;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: #8892a4;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+    </style>
+</head>
+<body id="page-top">
+<!-- 
+  👋 Hallo Neugieriger!
+  Du schaust in den Quellcode — ich mag deinen Stil.
+  Aber ich sehe dich. Deine IP, dein Browser, dein Betriebssystem.
+  Wir sind quitt. Ich behalte es für mich, wenn du das hier behältst. Deal?
+  – Simon
+-->
+
+    <!-- Navigation -->
+    <nav class="navbar" id="mainNav">
+        <a class="navbar-brand" href="#page-top">Hi there, my name is Simon!</a>
+        <button class="navbar-toggler" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#portfolio">My PhD</a></li>
+            <li><a href="#about">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero / PhD -->
+    <header class="masthead">
+        <div>
+            <h1>I am currently working on my PhD</h1>
+            <hr class="divider">
+            <p>In my PhD, I focus on Explainable Artificial Intelligence (XAI) and Interpretable Machine Learning (IML).</p>
+            <a class="btn-primary" href="https://scholar.google.com/citations?user=pcp_olIAAAAJ">Check my publications</a>
+        </div>
+    </header>
+
+    <!-- Travel / FindPenguins -->
+    <section class="travel-section">
+        <h1>Follow me travelling!</h1>
+        <hr class="divider">
+        <div class="findpenguins-wrapper">
+            <div class="findpenguins-media" findpgns-version="1" findpgns-embed="user">
+                <a href="https://findpenguins.com/7jkxun16ueowc" target="_top">Simon Schramm | FindPenguins</a>
             </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">I am currently working on my PhD</h1>
-                        <hr class="divider">
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">In my PhD, I focus on Explainable Artificial Intelligence (XAI) and Interpretable Machine Learning (IML).</p>
-                        <a class="btn btn-primary btn-xl" href="https://scholar.google.com/citations?user=pcp_olIAAAAJ">Check my publications</a>
-                    </div>
+        </div>
+        <script async defer src="//findpenguins.com/js/embed.js"></script>
+    </section>
+
+    <!-- Portfolio -->
+    <div id="portfolio">
+        <div class="portfolio-grid">
+            <a class="portfolio-box" href="https://www.researchgate.net/profile/Simon-Schramm-6/research" title="My PhD">
+                <img src="1.jpg" alt="PhD research">
+                <div class="portfolio-box-caption">
+                    <div class="project-category">Professional</div>
+                    <div class="project-name">My PhD at the University of Bamberg in cooperation with a company from the automotive industry started in 2021. I am happy to share my progress here!</div>
                 </div>
-            </div>
-        </header>
-        <!-- Travel-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">Follow me travelling!</h1>
-                        <hr class="divider">
-                    </div>
-                    <div class="findpenguins-media" findpgns-version="1" findpgns-embed="user"><a href="https://findpenguins.com/7jkxun16ueowc" target="_top">Simon Schramm | FindPenguins</a></div><script async defer src="//findpenguins.com/js/embed.js"></script>
+            </a>
+            <a class="portfolio-box" href="https://open.spotify.com/user/1145533653?si=eeebbac758654213" title="Spinning">
+                <img src="2.jpg" alt="Indoor cycling">
+                <div class="portfolio-box-caption">
+                    <div class="project-category">Professional</div>
+                    <div class="project-name">I am a professional indoor cycling instructor for more than one year now. I work on an AI-based indoor cycling playlist and lots of other stuff in that regard.</div>
                 </div>
-            </div>
-        </header>
-        <!-- Portfolio-->
-        <div id="portfolio">
-            <div class="container-fluid p-0">
-                <div class="row g-0">
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="https://www.researchgate.net/profile/Simon-Schramm-6/research" title="My PhD">
-                            <img class="img-fluid" src="1.jpg" alt="...">
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Professional</div>
-                                <div class="project-name">My PhD at the University of Bamberg in cooperation with a company from the automotive industry startet in 2021. I am happy to share my progress here! </div>
-                              </div>
-                          </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="https://open.spotify.com/user/1145533653?si=eeebbac758654213" title="Spinning">
-                            <img class="img-fluid" src="2.jpg" alt="...">
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Professional</div>
-                                <div class="project-name">I am a professional indoor cycling instructor for more than one year now. I work in an AI-based indoor cycling playlist and lots of other stuff in that regard.</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="https://simoncharmms.github.io/home/coffee" title="Barista Project">
-                            <img class="img-fluid" src="3.jpg" alt="...">
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Semi-professional</div>
-                                <div class="project-name">BaristaEck19 is my barista project at the office.</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="https://findpenguins.com/7jkxun16ueowc" title="Camper Van">
-                            <img class="img-fluid" src="4.jpg" alt="Our tail kitchen.">
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Semi-professional</div>
-                                <div class="project-name">We turned a VW T5 into a camper van! </div>
-                            </div>
-                        </a>
-                        </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="https://github.com/simoncharmms/donkeycar" title="Donkey Car">
-                            <img class="img-fluid" src="5.jpg" alt="...">
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Hobby</div>
-                                <div class="project-name">I love to race cars and built an AI model that I can compete with.</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="https://www.strava.com/athletes/45940672" title="Gran Fondo">
-                            <img class="img-fluid" src="6.jpg" alt="The race bike of my girlfriend and me">
-                            <div class="portfolio-box-caption p-3">
-                                <div class="project-category text-white-50">Hobby</div>
-                                <div class="project-name">Together with my family, I prepare for a 294km roadbike race - our Gran Fondo!</div>
-                            </div>
-                        </a>
-                    </div>
+            </a>
+            <a class="portfolio-box" href="https://simoncharmms.github.io/home/coffee" title="Barista Project">
+                <img src="3.jpg" alt="Barista project">
+                <div class="portfolio-box-caption">
+                    <div class="project-category">Semi-professional</div>
+                    <div class="project-name">BaristaEck19 is my barista project at the office.</div>
+                </div>
+            </a>
+            <a class="portfolio-box" href="https://findpenguins.com/7jkxun16ueowc" title="Camper Van">
+                <img src="4.jpg" alt="Our tail kitchen.">
+                <div class="portfolio-box-caption">
+                    <div class="project-category">Semi-professional</div>
+                    <div class="project-name">We turned a VW T5 into a camper van!</div>
+                </div>
+            </a>
+            <a class="portfolio-box" href="https://github.com/simoncharmms/donkeycar" title="Donkey Car">
+                <img src="5.jpg" alt="Donkey car AI">
+                <div class="portfolio-box-caption">
+                    <div class="project-category">Hobby</div>
+                    <div class="project-name">I love to race cars and built an AI model that I can compete with.</div>
+                </div>
+            </a>
+            <a class="portfolio-box" href="https://www.strava.com/athletes/45940672" title="Gran Fondo">
+                <img src="6.jpg" alt="The race bike of my girlfriend and me">
+                <div class="portfolio-box-caption">
+                    <div class="project-category">Hobby</div>
+                    <div class="project-name">Together with my family, I prepare for a 294km roadbike race – our Gran Fondo!</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="contact-inner">
+            <h2>Let's Get In Touch!</h2>
+            <hr class="divider">
+            <p>Would you like to know more about my projects or cooperate? Let me know!</p>
+            <div class="contact-card">
+                <a id="email-link" class="contact-link" href="#">✉ Loading…</a>
+                <div>
+                    <button class="btn-tel" id="tel-btn" onclick="revealTel()">📞 Show phone number</button>
+                    <span id="tel-reveal" style="display:none"></span>
                 </div>
             </div>
         </div>
-        <!-- Contact-->
-        <section class="page-section" id="contact">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 col-xl-6 text-center">
-                        <h2 class="mt-0">Let's Get In Touch!</h2>
-                        <hr class="divider">
-                        <p class="text-muted mb-5">Would you like to know more about my projects or cooperate? Let me know!</p>
-                    </div>
-                </div>
-                
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-4 text-center mb-5 mb-lg-0">
-                        <div>simon.schramm@proton.me</div>
-                        <div>+49-157-896-237-07</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Footer-->
-        <footer class="bg-light py-5">
-            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright © 2024 - Simon Schramm</div></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="./index_files/bootstrap.bundle.min.js"></script>
-        <!-- SimpleLightbox plugin JS-->
-        <script src="./index_files/simpleLightbox.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="./index_files/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="./index_files/sb-forms-latest.js"></script>
-    
+    </section>
 
-</body></html>
+    <!-- Footer -->
+    <footer>
+        <div>Copyright © 2024 – Simon Schramm</div>
+    </footer>
+
+    <script>
+        // Obfuscated contact info – assembled at runtime only
+        (function() {
+            // Email: simon.schramm@proton.me
+            var ep = ['simon','.','schramm','@','proton','.','me'];
+            var em = ep.join('');
+            var el = document.getElementById('email-link');
+            el.href = 'mailto:' + em;
+            el.textContent = '✉ ' + em;
+        })();
+
+        function revealTel() {
+            // Phone: +49-157-896-237-07
+            var tp = ['+49','-','157','-','896','-','237','-','07'];
+            var tel = tp.join('');
+            var btn = document.getElementById('tel-btn');
+            var rev = document.getElementById('tel-reveal');
+            btn.style.display = 'none';
+            rev.style.display = 'inline';
+            var a = document.createElement('a');
+            a.href = 'tel:' + tel.replace(/-/g,'');
+            a.textContent = tel;
+            a.className = 'contact-link';
+            rev.appendChild(a);
+        }
+    </script>
+
+</body>
+</html>
