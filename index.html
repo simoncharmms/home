@@ -84,15 +84,13 @@
             display: inline-block;
             max-width: 100%;
         }
-        /* Force FindPenguins widget into dark context */
+        /* FindPenguins wrapper — original colours preserved */
         .findpenguins-wrapper {
-            filter: invert(1) hue-rotate(180deg);
             border-radius: 12px;
             overflow: hidden;
             display: inline-block;
             max-width: 100%;
         }
-        .findpenguins-wrapper a { color: #c4a882 !important; }
 
         /* ── Portfolio Grid ── */
         #portfolio { background: #0a0e1a; }
@@ -216,7 +214,7 @@
                     <div class="project-name">My PhD at the University of Bamberg in cooperation with a company from the automotive industry started in 2021. I am happy to share my progress here!</div>
                 </div>
             </a>
-            <a class="portfolio-box" href="https://open.spotify.com/user/1145533653?si=eeebbac758654213" title="Spinning">
+            <a class="portfolio-box" href="https://simoncharmms.github.io/bike-jockey/" title="Spinning">
                 <img src="2.jpg" alt="Indoor cycling">
                 <div class="portfolio-box-caption">
                     <div class="project-category">Professional</div>
@@ -276,20 +274,18 @@
     </footer>
 
     <script>
-        // Obfuscated contact info – assembled at runtime only
+        // Contact info assembled at runtime from encoded parts — not readable in source
         (function() {
-            // Email: simon.schramm@proton.me
-            var ep = ['simon','.','schramm','@','proton','.','me'];
-            var em = ep.join('');
+            var _x = function(s) { return s.split('').map(function(c){ return String.fromCharCode(c.charCodeAt(0)-1); }).join(''); };
+            var em = _x('tjnpo') + '.' + _x('tdisbnN') + '\x40' + _x('qspUpo') + '.' + _x('nf');
             var el = document.getElementById('email-link');
-            el.href = 'mailto:' + em;
-            el.textContent = '✉ ' + em;
+            el.href = 'mailto:' + em.replace('N','n').replace('U','t');
+            el.textContent = '\u2709 ' + em.replace('N','n').replace('U','t');
         })();
 
         function revealTel() {
-            // Phone: +49-157-896-237-07
-            var tp = ['+49','-','157','-','896','-','237','-','07'];
-            var tel = tp.join('');
+            var _d = function(a){ return a.map(function(n){ return String.fromCharCode(n); }).join(''); };
+            var tel = _d([43,52,57,45,49,53,55,45,56,57,54,45,50,51,55,45,48,55]);
             var btn = document.getElementById('tel-btn');
             var rev = document.getElementById('tel-reveal');
             btn.style.display = 'none';

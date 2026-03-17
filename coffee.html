@@ -231,6 +231,8 @@
             border-radius: 12px;
             padding: 1.5rem;
             border: 1px solid rgba(255,255,255,0.04);
+            max-width: 100%;
+            overflow: hidden;
         }
         .chart-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -372,7 +374,9 @@
                     <span class="chart-change" id="priceChange"></span>
                 </div>
             </div>
-            <canvas id="arabicaChart" height="200"></canvas>
+            <div style="position:relative;height:220px;max-height:220px;overflow:hidden;">
+                <canvas id="arabicaChart" style="max-height:220px;"></canvas>
+            </div>
             <p class="chart-meta" id="chartMeta">Loading market data…</p>
         </div>
     </div>
