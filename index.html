@@ -259,7 +259,10 @@
             <hr class="divider">
             <p>Would you like to know more about my projects or cooperate? Let me know!</p>
             <div class="contact-card">
-                <a id="email-link" class="contact-link" href="#">✉ Loading…</a>
+                <div>
+                    <button class="btn-tel" id="email-btn" onclick="revealEmail()">✉ Show email address</button>
+                    <span id="email-reveal" style="display:none"></span>
+                </div>
                 <div>
                     <button class="btn-tel" id="tel-btn" onclick="revealTel()">📞 Show phone number</button>
                     <span id="tel-reveal" style="display:none"></span>
@@ -274,14 +277,21 @@
     </footer>
 
     <script>
-        // Contact info assembled at runtime from encoded parts — not readable in source
-        (function() {
-            var _x = function(s) { return s.split('').map(function(c){ return String.fromCharCode(c.charCodeAt(0)-1); }).join(''); };
+        // Nothing in the source — both revealed only on click
+        function revealEmail() {
+            var _x = function(s){ return s.split('').map(function(c){ return String.fromCharCode(c.charCodeAt(0)-1); }).join(''); };
             var em = _x('tjnpo') + '.' + _x('tdisbnN') + '\x40' + _x('qspUpo') + '.' + _x('nf');
-            var el = document.getElementById('email-link');
-            el.href = 'mailto:' + em.replace('N','n').replace('U','t');
-            el.textContent = '\u2709 ' + em.replace('N','n').replace('U','t');
-        })();
+            em = em.replace('N','n').replace('U','t');
+            var btn = document.getElementById('email-btn');
+            var rev = document.getElementById('email-reveal');
+            btn.style.display = 'none';
+            rev.style.display = 'inline';
+            var a = document.createElement('a');
+            a.href = 'mailto:' + em;
+            a.textContent = em;
+            a.className = 'contact-link';
+            rev.appendChild(a);
+        }
 
         function revealTel() {
             var _d = function(a){ return a.map(function(n){ return String.fromCharCode(n); }).join(''); };
