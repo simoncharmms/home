@@ -263,10 +263,6 @@
                     <button class="btn-tel" id="email-btn" onclick="revealEmail()">✉ Show email address</button>
                     <span id="email-reveal" style="display:none"></span>
                 </div>
-                <div>
-                    <button class="btn-tel" id="tel-btn" onclick="revealTel()">📞 Show phone number</button>
-                    <span id="tel-reveal" style="display:none"></span>
-                </div>
             </div>
         </div>
     </section>
@@ -292,21 +288,6 @@
             a.className = 'contact-link';
             rev.appendChild(a);
         }
-
-        function revealTel() {
-            var _d = function(a){ return a.map(function(n){ return String.fromCharCode(n); }).join(''); };
-            var tel = _d([43,52,57,45,49,53,55,45,56,57,54,45,50,51,55,45,48,55]);
-            var btn = document.getElementById('tel-btn');
-            var rev = document.getElementById('tel-reveal');
-            btn.style.display = 'none';
-            rev.style.display = 'inline';
-            var a = document.createElement('a');
-            a.href = 'tel:' + tel.replace(/-/g,'');
-            a.textContent = tel;
-            a.className = 'contact-link';
-            rev.appendChild(a);
-        }
-    </script>
 
 </body>
 </html>
