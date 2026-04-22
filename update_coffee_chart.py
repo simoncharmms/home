@@ -72,7 +72,7 @@ def get_file_from_github():
     req = urllib.request.Request(url, headers={
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json",
-        "User-Agent": "homer-coffee-updater"
+        "User-Agent": "python-requests/2.31"
     })
     with urllib.request.urlopen(req, timeout=15) as resp:
         data = json.loads(resp.read())
@@ -96,7 +96,7 @@ def inject_chart_data(html, arabica):
     end_marker = "/* @@ARABICA_DATA_END@@ */"
 
     new_block = f"""{start_marker}
-        // Auto-updated by homer-coffee-updater — {updated}
+        // Auto-updated — {updated}
         var _arabicaLabels = {labels_json};
         var _arabicaPrices = {prices_json};
         var _arabicaCurrent = '{current}';
@@ -154,7 +154,7 @@ def push_to_github(content, sha):
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json",
         "Content-Type": "application/json",
-        "User-Agent": "homer-coffee-updater"
+        "User-Agent": "python-requests/2.31"
     })
     with urllib.request.urlopen(req, timeout=15) as resp:
         result = json.loads(resp.read())
