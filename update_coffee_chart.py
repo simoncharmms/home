@@ -9,11 +9,14 @@ Price unit: USX cents/lb (Yahoo Finance native)
 
 import json
 import sys
-import urllib.request
-import urllib.error
 import base64
 import os
 from datetime import datetime
+
+try:
+    import requests as _requests
+except ImportError:  # pragma: no cover
+    _requests = None
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 if not GITHUB_TOKEN:
@@ -23,17 +26,21 @@ REPO = "simoncharmms/home"
 FILE_PATH = "coffee.html"
 YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/KC%3DF?interval=1d&range=1mo"
 
+def _session():
+    """Return a requests.Session with standard headers."""
+    if _requests is None:
+        raise RuntimeError("requests library not installed — run: pip install requests")
+    s = _requests.Session()
+    s.headers.update({"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"})
+    return s
+
+
 def fetch_arabica_data():
     """Fetch 30-day Arabica futures data from Yahoo Finance."""
-    req = urllib.request.Request(
-        YAHOO_URL,
-        headers={
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-            "Accept": "application/json"
-        }
-    )
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        data = json.loads(resp.read())
+    s = _session()
+    resp = s.get(YAHOO_URL, headers={"Accept": "application/json"}, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
 
     result = data["chart"]["result"][0]
     timestamps = result["timestamp"]
@@ -69,13 +76,16 @@ def fetch_arabica_data():
 def get_file_from_github():
     """Get current coffee.html content and SHA from GitHub."""
     url = f"https://api.github.com/repos/{REPO}/contents/{FILE_PATH}"
-    req = urllib.request.Request(url, headers={
-        "Authorization": f"token {GITHUB_TOKEN}",
+    s = _session()
+    s.headers.update({
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json",
-        "User-Agent": "python-requests/2.31"
     })
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        data = json.loads(resp.read())
+    resp = s.get(url, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
+    if "content" not in data:
+        raise RuntimeError(f"GitHub API error: {data.get('message', data)}")
     content = base64.b64decode(data["content"]).decode("utf-8")
     sha = data["sha"]
     return content, sha
@@ -143,22 +153,23 @@ def push_to_github(content, sha):
     """Push updated coffee.html to GitHub."""
     url = f"https://api.github.com/repos/{REPO}/contents/{FILE_PATH}"
     today = datetime.utcnow().strftime("%Y-%m-%d")
-    payload = json.dumps({
+    s = _session()
+    s.headers.update({
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json",
+    })
+    payload = {
         "message": f"chore(coffee): update Arabica price chart [{today}]",
         "content": base64.b64encode(content.encode("utf-8")).decode("utf-8"),
         "sha": sha,
         "branch": "main"
-    }).encode("utf-8")
-
-    req = urllib.request.Request(url, data=payload, method="PUT", headers={
-        "Authorization": f"token {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github.v3+json",
-        "Content-Type": "application/json",
-        "User-Agent": "python-requests/2.31"
-    })
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        result = json.loads(resp.read())
-    return result["commit"]["sha"]
+    }
+    resp = s.put(url, json=payload, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
+    if "commit" not in data:
+        raise RuntimeError(f"GitHub push error: {data.get('message', data)}")
+    return data["commit"]["sha"]
 
 if __name__ == "__main__":
     print("Fetching Arabica price data...")
