@@ -11,7 +11,7 @@ import json
 import sys
 import base64
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 try:
     import requests as _requests
@@ -42,10 +42,13 @@ def fetch_arabica_data():
     resp.raise_for_status()
     data = resp.json()
 
-    result = data["chart"]["result"][0]
-    timestamps = result["timestamp"]
-    closes = result["indicators"]["quote"][0]["close"]
-    meta = result["meta"]
+    try:
+        result = data["chart"]["result"][0]
+        timestamps = result["timestamp"]
+        closes = result["indicators"]["quote"][0]["close"]
+        meta = result["meta"]
+    except (KeyError, IndexError, TypeError) as e:
+        raise RuntimeError(f"Unexpected Yahoo Finance response structure: {e}") from e
 
     labels = []
     prices = []
@@ -62,7 +65,7 @@ def fetch_arabica_data():
     prev_price = prices[-2] if len(prices) > 1 else current_price
     change = round(current_price - prev_price, 2)
     change_pct = round((change / prev_price) * 100, 2) if prev_price else 0
-    today = datetime.utcnow().strftime("%d %b %Y")
+    today = datetime.now(timezone.utc).strftime("%d %b %Y")
 
     return {
         "labels": labels,
@@ -152,7 +155,7 @@ def inject_chart_data(html, arabica):
 def push_to_github(content, sha):
     """Push updated coffee.html to GitHub."""
     url = f"https://api.github.com/repos/{REPO}/contents/{FILE_PATH}"
-    today = datetime.utcnow().strftime("%Y-%m-%d")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     s = _session()
     s.headers.update({
         "Authorization": f"Bearer {GITHUB_TOKEN}",
