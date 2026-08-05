@@ -55,7 +55,7 @@ def fetch_arabica_data():
     for ts, close in zip(timestamps, closes):
         if close is None:
             continue
-        dt = datetime.utcfromtimestamp(ts)
+        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
         labels.append(dt.strftime("%b %-d"))
         # Convert USX cents/lb → USD/kg
         usd_per_kg = (close / 100) / 0.4536
